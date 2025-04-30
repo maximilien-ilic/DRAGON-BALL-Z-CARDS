@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAGON BALL Z CARDS</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="light-mode">
+    <div class="banniere">
+        <!-- Menu hamburger pour mobile -->
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+             
+        <div class="logo">
+          <img src="assets/logo.png" alt="logotype">
+        </div>
+        <!-- Navigation principale (verticale en mode mobile) -->
+        <div class="nav-container" id="nav-menu">
+            <div class="text-top active">
+                <a href="index.html"><h1>accueil</h1></a>
+            </div>
+            <div class="text-top">
+                <a href="API.php"><h1>cartes</h1></a>
+            </div>
+            <div class="text-top">
+              <a href="booster.html"><h1>boosters</h1></a>
+            </div>
+            <div class="text-top">
+                <a href="échanges.html"><h1>échange</h1></a>
+            </div>
+        </div>
+        <div class="icons-container">
+          <a href="Compte.php"><img class="compte" id="icon-compte" src="assets/utilisateur.png" alt="bouton compte"></a>
+          <img class="recherche" id="icon-recherche" src="assets/chercher.png" alt="boutton recherche">
+          <button id="mode-toggle">
+              <img class="darkmode" id="mode-icon" src="assets/lune.png" alt="bouton mode">
+          </button>
+      </div>
+    </div>
+    
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="assets/slider1.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="assets/SLIDER2.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="assets/slider3.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="assets/slider4.jpg" />
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="JS/main.js"></script>
+</body>
+</html>
