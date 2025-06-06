@@ -57,3 +57,18 @@ modeToggle.addEventListener('click', function() {
 document.getElementById('menu-toggle').addEventListener('click', function() {
   document.getElementById('nav-menu').classList.toggle('active');
 });
+
+
+const open = document.getElementById('open');
+const close = document.getElementById('close');
+const modal_Containner = document.getElementById('modal_Containner');
+
+open.addEventListener('click', () => {
+  modal_Containner.classList.add('show'); 
+});
+
+close.addEventListener('click', () => { 
+  modal_Containner.classList.remove('show'); 
+});
+
+

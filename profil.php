@@ -127,7 +127,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
     }
 
     body {
-        background-color:rgb(152, 10, 228);
+        background-color:rgb(238, 228, 243);
         font-family: 'Arial', sans-serif;
         color: #333;
         line-height: 1.6;
@@ -138,7 +138,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
   
     h1 {
         font-family: 'Bangers', cursive;
-        color: #ff6b01;
+        color: #530C6D;
         text-align: center;
         font-size: 2.5rem;
         margin-bottom: 30px;
@@ -168,7 +168,8 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
     }
 
     thead {
-        background-color: #ff6b01;
+        background-color: #530C6D;
+
         color: white;
     }
 
@@ -194,7 +195,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
     }
 
     tbody tr:last-of-type {
-        border-bottom: 2px solid #ff6b01;
+        border-bottom: 2px solid #530C6D;
     }
 
     /* Links in Table */
@@ -231,12 +232,12 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         max-width: 600px;
         margin: 0 auto 30px;
-        border: 2px solid #ff6b01;
+        border: 2px solid #530C6D;
     }
 
     form h2 {
         font-family: 'Bangers', cursive;
-        color: #ff6b01;
+        color: #530C6D;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -261,7 +262,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
     }
 
     form input[type="submit"] {
-        background-color: #ff6b01;
+        background-color: #530C6D;
         color: white;
         border: none;
         padding: 12px 20px;
@@ -277,9 +278,9 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
     }
 
     form input[type="submit"]:hover {
-        background-color: #e85d00;
+        background-color: #530C6D;
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(255, 107, 1, 0.5);
+        box-shadow: 0 0 10px rgba(111, 13, 80, 0.5);
     }
 
     /* BUTTON DECONEXION */

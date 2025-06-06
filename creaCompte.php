@@ -1,11 +1,12 @@
 <?php
+require_once("connexion.php");
+
 // Initialiser les variables pour éviter les erreurs
 $email = isset($_POST["email"]) ? $_POST["email"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-require_once("connexion.php");
 
-if($_POST) {
+if(isset($_POST['email'])) {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
     
@@ -28,22 +29,21 @@ $success = isset($_GET['success']) && $_GET['success'] == '1';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylecompte.css">
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <title>Dragon Ball Z CARDS</title>
+    <title>Dragon Ball Z CARDS - Création de compte</title>
+    <link rel="stylesheet" href="CSS/creaCompte.css">
 </head>
 <body>
-    <!--formulaire de creation de compte-->
     <div class="container">
         <div class="dragon-ball"></div>
         <div class="dragon-ball"></div>
         
-        <div>
-            <a class="logo" href="index.html"></a>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logo.png" alt="Dragon Ball Z Cards"></a>
         </div>
         
         <h1>Créer un compte</h1>
@@ -56,7 +56,7 @@ $success = isset($_GET['success']) && $_GET['success'] == '1';
             Inscription réussie ! Vous allez être redirigé...
         </div>
         
-        <form method="POST" id="registerForm" >
+        <form method="POST" id="registerForm">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="votre@email.com" value="<?php echo htmlspecialchars($email); ?>">
@@ -82,8 +82,9 @@ $success = isset($_GET['success']) && $_GET['success'] == '1';
             <button type="submit">S'INSCRIRE</button>
         </form>
     </div>
+    
     <script>
-        //transfere variable php a js
+        // Transfert variable php à js
         var serverData = <?php echo json_encode([
             'email' => $email,
             'password' => $password
@@ -172,22 +173,19 @@ $success = isset($_GET['success']) && $_GET['success'] == '1';
                 errorContainer.style.display = 'block';
             } else {
                 successMessage.style.display = 'block';
-                console.log("Formulaire envoyé avec succès !");
                 // Soumettre le formulaire si tout est valide
                 this.submit();
-                // Attendre 1 seconde puis rediriger
-                var delayInMilliseconds = 5000; //1 second
-                setTimeout(function() {
-                    window.location.href = "index.html";
-                }, delayInMilliseconds);
             }
         });
+        
         <?php if($success): ?>
         // Si le paramètre success est présent, afficher le message puis rediriger
-        document.getElementById('successMessage').style.display = 'block';
-        setTimeout(function() {
-            window.location.href = "Compte.php";
-        }, 1000); // 1000 ms = 1 seconde
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(function() {
+                window.location.href = "Compte.php";
+            }, 2000); // 2 secondes
+        });
         <?php endif; ?>
     </script>
 </body>

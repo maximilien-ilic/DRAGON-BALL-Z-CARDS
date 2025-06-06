@@ -8,7 +8,6 @@ $raceColors = [
 
 // Recherche
 $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
-$selectedRace = isset($_GET['race']) ? trim($_GET['race']) : '';
 
 // Récupération des données API
 $characters = [];
@@ -25,22 +24,14 @@ try {
         if (isset($data['meta']['totalPages']) && $page >= $data['meta']['totalPages']) break;
     }
     
-    // Récupérer toutes les races uniques
-    $allRaces = array_unique(array_column($characters, 'race'));
-    $allRaces = array_filter($allRaces);
-    sort($allRaces);
-    
-    // Filtrage combiné recherche + race
-    if ($searchTerm || $selectedRace) {
-        $characters = array_filter($characters, function($char) use ($searchTerm, $selectedRace) {
-            $nameMatch = $searchTerm ? stripos($char['name'], $searchTerm) !== false : true;
-            $raceMatch = $selectedRace ? ($char['race'] ?? '') === $selectedRace : true;
-            return $nameMatch && $raceMatch;
+    // Filtrage par recherche
+    if ($searchTerm) {
+        $characters = array_filter($characters, function($char) use ($searchTerm) {
+            return stripos($char['name'], $searchTerm) !== false;
         });
     }
 } catch (Exception $e) {
     $characters = [];
-    $allRaces = [];
 }
 ?>
 
@@ -50,7 +41,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Ball Z Cards</title>
-    <link rel="stylesheet" href="CSS/api.css">
+    <link rel="stylesheet" href="CSS/carte.css">
+
 </head>
 <body>
     <div class="container">
@@ -62,47 +54,20 @@ try {
 
         <form class="search-form" method="GET">
             <input type="text" name="search" placeholder="Rechercher..." value="<?= htmlspecialchars($searchTerm) ?>">
-            
-            <select name="race">
-                <option value="">Toutes les races</option>
-                <?php foreach ($allRaces as $race): ?>
-                    <option value="<?= htmlspecialchars($race) ?>" 
-                        <?= $selectedRace === $race ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($race) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            
-            <button type="submit">Filtrer</button>
+            <button type="submit">Rechercher</button>
         </form>
 
-        <?php if ($searchTerm || $selectedRace): ?>
-            <div class="active-filters">
-                <small>Filtres actifs : 
-                    <?php if ($searchTerm): ?>
-                        <span class="filter-tag">Recherche: "<?= htmlspecialchars($searchTerm) ?>"</span>
-                    <?php endif; ?>
-                    
-                    <?php if ($selectedRace): ?>
-                        <span class="filter-tag">Race: <?= htmlspecialchars($selectedRace) ?></span>
-                    <?php endif; ?>
-                    
-                    <a href="?" class="clear-filters">Effacer tout</a>
-                </small>
-            </div>
+        <?php if ($searchTerm): ?>
+            <p style="text-align:center; margin-bottom:20px;">
+                <a href="?" style="color:#9370DB;">Effacer la recherche</a>
+            </p>
         <?php endif; ?>
 
         <div class="grid">
             <?php if (empty($characters)): ?>
                 <div class="error">
-                    <h2><?= ($searchTerm || $selectedRace) ? 'Aucun résultat' : 'Erreur de chargement' ?></h2>
-                    <p>
-                        <?php if ($searchTerm || $selectedRace): ?>
-                            Aucun personnage trouvé avec les filtres actuels
-                        <?php else: ?>
-                            Impossible de charger les données
-                        <?php endif; ?>
-                    </p>
+                    <h2><?= $searchTerm ? 'Aucun résultat' : 'Erreur de chargement' ?></h2>
+                    <p><?= $searchTerm ? "Aucun personnage trouvé pour \"$searchTerm\"" : "Impossible de charger les données" ?></p>
                 </div>
             <?php else: ?>
                 <?php foreach ($characters as $i => $char): ?>
@@ -111,7 +76,7 @@ try {
                             <?php if ($char['image']): ?>
                                 <img src="<?= htmlspecialchars($char['image']) ?>" alt="<?= htmlspecialchars($char['name']) ?>">
                             <?php else: ?>
-                                <div style="carte2">
+                                <div style="width:100px;height:100px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#9370DB;font-weight:bold;">
                                     <?= htmlspecialchars($char['name']) ?>
                                 </div>
                             <?php endif; ?>
@@ -122,7 +87,6 @@ try {
                                 <span class="race-badge" style="background:<?= $raceColors[$char['race']] ?? '#8A2BE2' ?>">
                                     <?= htmlspecialchars($char['race']) ?>
                                 </span>
-                                <img class="fav" id="coeur" src="assets/etoile.png" alt="favorie">
                             <?php endif; ?>
                         </div>
                     </div>
