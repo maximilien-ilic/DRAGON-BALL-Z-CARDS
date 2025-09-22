@@ -198,7 +198,6 @@ if(isset($_GET["action"]) && $_GET["action"] == "deconnexion") {
         border-bottom: 2px solid #530C6D;
     }
 
-    /* Links in Table */
     table a {
         text-decoration: none;
         color: #333;
